@@ -1,0 +1,131 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile document",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "maxLength": 255
+        },
+        "displayName": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["email", "createdAt"]
+    },
+    "Favorite": {
+      "title": "Favorite",
+      "description": "User favorited research entity, benchmark, or hardening gate",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "itemId": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "itemType": {
+          "type": "string",
+          "enum": ["subsystem", "benchmark", "rc_gate", "profile", "code_snippet"]
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "category": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "summary": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["userId", "itemId", "itemType", "title", "createdAt"]
+    },
+    "SimulationSnapshot": {
+      "title": "SimulationSnapshot",
+      "description": "Captured visual state and metric data points of the token hierarchy force graph",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "scenarioId": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "scenarioTitle": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "turnIndex": {
+          "type": "number",
+          "minimum": 0
+        },
+        "turnAction": {
+          "type": "string",
+          "maxLength": 300
+        },
+        "tokensCount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "vramPages": {
+          "type": "number",
+          "minimum": 0
+        },
+        "dramPages": {
+          "type": "number",
+          "minimum": 0
+        },
+        "nvmePages": {
+          "type": "number",
+          "minimum": 0
+        },
+        "nodeCount": {
+          "type": "number",
+          "minimum": 0
+        },
+        "imageData": {
+          "type": "string",
+          "maxLength": 800000
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["userId", "scenarioId", "scenarioTitle", "turnIndex", "turnAction", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User account document"
+    },
+    "/users/{userId}/favorites/{favoriteId}": {
+      "schema": "Favorite",
+      "description": "Collection of items favorited by the user"
+    },
+    "/users/{userId}/snapshots/{snapshotId}": {
+      "schema": "SimulationSnapshot",
+      "description": "Subcollection of captured token hierarchy graph snapshots"
+    }
+  }
+}

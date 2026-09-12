@@ -1,0 +1,6 @@
+{
+  "name": "KV-Memory Platform & Explorer",
+  "description": "Interactive research workbench, memory timeline simulator, and release qualification portal for KV-Memory (kvmem-qw3) tiered LLM agent memory architecture.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
